@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarvi Studio - All Your Business Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fff1f1', 100: '#ffdfdf', 200: '#ffc5c5', 300: '#ff9d9d', 400: '#ff6464', 500: '#ff3131', 600: '#e62627', 700: '#c11c1d', 800: '#a01a1b', 900: '#841c1d', 950: '#48090a' },
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], script: ['Playfair Display', 'serif'], hind: ['Hind Siliguri', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .bg-grid-pattern { background-image: radial-gradient(circle, #ff3131 1px, transparent 1px); background-size: 30px 30px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes pathAnimation { 0% { stroke-dashoffset: 1000; opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+        .circuit-path { stroke-dasharray: 1000; animation: pathAnimation 15s linear infinite; }
+        .circuit-path-thick { stroke-dasharray: 1000; animation: pathAnimation 12s linear infinite; }
+        .smooth-scroll { scroll-behavior: smooth; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        /* WordPress Fixes */
+        #zarvi-studio-app p { margin-bottom: 0 !important; }
+        html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    </style>
+</head>
+<body id="zarvi-studio-app" class="bg-white text-black font-sans selection:bg-primary-600 selection:text-white smooth-scroll" x-data="appData()" x-init="init()">
+    <nav class="absolute top-0 left-0 right-0 z-50 bg-[#e0e0e0] border-b border-zinc-300 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 shrink-0">
+                <div class="w-10 h-10 bg-white rounded flex flex-col items-center justify-center shadow-sm border border-zinc-200">
+                    <div class="text-center">
+                        <span class="block text-black font-black text-[6px] leading-none">ZARVI</span>
+                        <span class="block text-[#e62627] font-black text-[6px] leading-none">STUDIO</span>
+                    </div>
+                </div>
+                <span class="text-xl font-bold tracking-tighter text-black uppercase">ZARVI <span class="text-[#e62627]">STUDIO</span></span>
+            </a>
+            <div class="flex items-center gap-4 sm:gap-12 overflow-x-auto no-scrollbar">
+                <a href="#home" class="text-xs sm:text-base text-zinc-800 hover:text-[#e62627] transition-colors font-bold whitespace-nowrap">Home</a>
+                <a href="#about" class="text-xs sm:text-base text-zinc-800 hover:text-[#e62627] transition-colors font-bold whitespace-nowrap">About</a>
+                <a href="#contact" @click="scrollToForm()" class="text-xs sm:text-base text-zinc-800 hover:text-[#e62627] transition-colors font-bold whitespace-nowrap">Contact</a>
+                <a :href="'https://wa.me/' + whatsapp" target="_blank" class="bg-[#e62627] hover:bg-[#c11c1d] text-white px-4 sm:px-8 py-2 sm:py-2.5 rounded-full font-black transition-all shadow-lg text-[10px] sm:text-base shrink-0 uppercase tracking-tight">WHATSAPP</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative flex items-center pt-32 pb-12 overflow-hidden bg-[#050505]">
+        <div class="absolute inset-0 bg-grid-pattern opacity-[0.03] z-0"></div>
+        <div class="absolute top-1/2 -left-20 w-96 h-96 bg-[#e62627]/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute top-1/2 -right-20 w-96 h-96 bg-[#e62627]/5 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-12 items-center gap-4 lg:gap-16">
+                <div class="col-span-1 lg:col-span-7 text-center lg:text-left">
+                    <h1 class="text-xl sm:text-2xl lg:text-5xl font-black mb-3 leading-[1.1] text-white tracking-tight">All Your Business <br><span class="text-[#ff2d2d]">Solutions In One Place.</span></h1>
+                    <p class="text-[10px] sm:text-sm lg:text-lg text-zinc-400 mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed">We provide professional cinematography, photography, digital marketing, and software development solutions to scale your business.</p>
+                    <div class="flex flex-row gap-2 lg:gap-6 justify-center lg:justify-start mt-4">
+                        <a href="#contact" @click="scrollToForm()" class="group relative overflow-hidden bg-gradient-to-r from-[#ff2d2d] to-[#e62627] text-white px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full font-black text-[10px] sm:text-base transition-all shadow-[0_10px_20px_rgba(255,45,45,0.3)] hover:shadow-[0_15px_30px_rgba(255,45,45,0.5)] flex items-center justify-center transform hover:-translate-y-1">
+                            <span class="relative z-10">Book Now</span>
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                        <a :href="'https://wa.me/' + whatsapp" target="_blank" class="group relative overflow-hidden bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full font-black text-[10px] sm:text-base transition-all shadow-[0_10px_20px_rgba(37,211,102,0.2)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.4)] flex items-center justify-center gap-1 transform hover:-translate-y-1">
+                            <i data-lucide="message-circle" class="w-2.5 h-2.5 sm:w-4 sm:h-4 relative z-10"></i>
+                            <span class="relative z-10">WhatsApp</span>
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-1 lg:col-span-5 relative">
+                    <div class="relative z-10 rounded-2xl sm:rounded-[40px] overflow-hidden shadow-2xl border-2 sm:border-[6px] border-white aspect-video bg-zinc-900 w-full">
+                        <iframe 
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/x9u53yDQ-rY?autoplay=1&mute=1&loop=1&playlist=x9u53yDQ-rY" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-2 sm:px-4 relative z-10">
+            <div class="grid grid-cols-5 gap-1.5 sm:gap-8">
+                <!-- 5 Years Experienced Team -->
+                <div class="bg-white p-2 sm:p-6 rounded-xl sm:rounded-[32px] border border-solid sm:border-2 border-[#e72629] flex flex-col items-center text-center gap-1 sm:gap-4 shadow-sm hover:shadow-xl transition-all h-full justify-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e72629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-14 sm:h-14">
+                        <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                    </svg>
+                    <p class="font-bold text-[7px] sm:text-lg text-zinc-900 leading-tight tracking-tighter sm:tracking-tight">5 Years Experienced Team</p>
+                </div>
+                <!-- Expert Digital Marketers -->
+                <div class="bg-white p-2 sm:p-6 rounded-xl sm:rounded-[32px] border border-solid sm:border-2 border-[#e72629] flex flex-col items-center text-center gap-1 sm:gap-4 shadow-sm hover:shadow-xl transition-all h-full justify-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e72629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-14 sm:h-14">
+                        <path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+                    </svg>
+                    <p class="font-bold text-[7px] sm:text-lg text-zinc-900 leading-tight tracking-tighter sm:tracking-tight">Expert Digital Marketers</p>
+                </div>
+                <!-- Professional Sound Designers -->
+                <div class="bg-white p-2 sm:p-6 rounded-xl sm:rounded-[32px] border border-solid sm:border-2 border-[#e72629] flex flex-col items-center text-center gap-1 sm:gap-4 shadow-sm hover:shadow-xl transition-all h-full justify-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e72629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-14 sm:h-14">
+                        <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                    </svg>
+                    <p class="font-bold text-[7px] sm:text-lg text-zinc-900 leading-tight tracking-tighter sm:tracking-tight">Professional Sound Designers</p>
+                </div>
+                <!-- Skilled Editing Team -->
+                <div class="bg-white p-2 sm:p-6 rounded-xl sm:rounded-[32px] border border-solid sm:border-2 border-[#e72629] flex flex-col items-center text-center gap-1 sm:gap-4 shadow-sm hover:shadow-xl transition-all h-full justify-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e72629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-14 sm:h-14">
+                        <path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/>
+                    </svg>
+                    <p class="font-bold text-[7px] sm:text-lg text-zinc-900 leading-tight tracking-tighter sm:tracking-tight">Skilled Editing Team</p>
+                </div>
+                <!-- Expert Script Writers -->
+                <div class="bg-white p-2 sm:p-6 rounded-xl sm:rounded-[32px] border border-solid sm:border-2 border-[#e72629] flex flex-col items-center text-center gap-1 sm:gap-4 shadow-sm hover:shadow-xl transition-all h-full justify-center group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e72629" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-14 sm:h-14">
+                        <path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 5 5"/><path d="m8.5 8.5 1.5 1.5"/>
+                    </svg>
+                    <p class="font-bold text-[7px] sm:text-lg text-zinc-900 leading-tight tracking-tighter sm:tracking-tight">Expert Script Writers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Removed First Our Services Section -->
+
+
+    <!-- Professional Services Slider -->
+    <section class="py-12 bg-[#25575c] relative overflow-hidden" x-data="{ activeService: 0 }">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="col-span-1 lg:col-span-5 space-y-6 text-center lg:text-left">
+                    <div class="space-y-2">
+                        <h4 class="text-white font-script text-3xl italic tracking-wide mb-1">Professional <span class="text-[#ff3131] not-italic font-sans font-black uppercase tracking-tighter">Services</span></h4>
+                        <div class="w-16 h-1 bg-[#ff3131] rounded-full mx-auto lg:mx-0"></div>
+                        <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tighter leading-none pt-1" x-text="services[activeService].title"></h2>
+                    </div>
+                    <p class="text-white/90 text-base lg:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium" x-text="services[activeService].description"></p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-8 justify-center lg:justify-start">
+                        <a href="#quality-video" class="px-8 py-4 rounded-2xl border-2 text-white font-black hover:bg-white hover:text-[#25575c] transition-all text-lg uppercase tracking-tight flex items-center justify-center">Projects</a>
+                        <a :href="'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('*Booking Request*\n\n*Service:* ' + services[activeService].title)" target="_blank" class="px-8 py-4 rounded-2xl bg-[#ff3131] text-white font-black hover:bg-[#e62627] transition-all text-lg flex items-center justify-center gap-3 shadow-xl transform hover:scale-105 uppercase tracking-tight">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Slider -->
+                <div class="col-span-1 lg:col-span-7 relative">
+                    <div class="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory py-10 px-6" x-ref="serviceSlider">
+                        <template x-for="(service, index) in services" :key="service.id">
+                            <div @click="activeService = index" 
+                                 class="flex-shrink-0 w-[280px] sm:w-[380px] aspect-[4/5] rounded-[40px] overflow-hidden relative cursor-pointer snap-start transition-all duration-500 border-4 border-solid"
+                                 :class="activeService === index ? 'border-[#ff3131] scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.6)]' : 'border-white/20 opacity-50 hover:opacity-100 hover:border-white/50'">
+                                <img :src="'https://picsum.photos/seed/' + service.id + '/800/1000'" class="w-full h-full object-cover" referrerPolicy="no-referrer">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                                <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                                    <div class="w-14 h-14 rounded-2xl bg-[#ff3131] flex items-center justify-center mb-3 shadow-xl">
+                                        <i :data-lucide="service.icon" class="text-white w-8 h-8"></i>
+                                    </div>
+                                    <h3 class="text-white text-2xl font-black mb-1 tracking-tighter uppercase break-words leading-none" x-text="service.title"></h3>
+                                    <p class="text-white/90 text-sm leading-tight font-medium line-clamp-3" x-text="service.description"></p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex items-center justify-between mt-0">
+                        <div class="flex gap-3 px-6">
+                            <button @click="activeService = (activeService > 0 ? activeService - 1 : services.length - 1); $refs.serviceSlider.scrollTo({ left: activeService * 412, behavior: 'smooth' })" class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-black hover:bg-[#ff3131] hover:text-white transition-all shadow-xl">
+                                <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                            </button>
+                            <button @click="activeService = (activeService < services.length - 1 ? activeService + 1 : 0); $refs.serviceSlider.scrollTo({ left: activeService * 412, behavior: 'smooth' })" class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-black hover:bg-[#ff3131] hover:text-white transition-all shadow-xl">
+                                <i data-lucide="chevron-right" class="w-7 h-7"></i>
+                            </button>
+                        </div>
+                        <div class="px-6">
+                            <a href="#services" class="bg-black text-white px-7 py-3.5 rounded-xl font-black text-base flex items-center gap-2 hover:bg-[#ff3131] transition-all shadow-xl border border-white/10 uppercase tracking-tight">
+                                All Services <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none"></div>
+    </section>
+
+    <section class="py-24 bg-black relative overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" class="opacity-40">
+                <filter id="gold-glow-filter-thick"><feGaussianBlur stdDeviation="0.8" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                <g id="circuit-thick-group"></g>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                <div class="col-span-1 lg:col-span-4">
+                    <div class="mb-8 text-center lg:text-left">
+                        <h3 class="font-script text-2xl text-primary-500 mb-1">Your Dream</h3>
+                        <h2 class="text-4xl font-black text-white uppercase tracking-tighter leading-none">OUR CREATION</h2>
+                    </div>
+                    <div class="relative py-4 max-w-md mx-auto lg:mx-0">
+                        <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary-500/30 -translate-x-1/2"></div>
+                        <div class="space-y-0 relative">
+                            <template x-for="(item, idx) in timelineItems" :key="idx">
+                                <div class="flex flex-row items-center justify-between mb-6 last:mb-0" :class="idx % 2 === 0 ? '' : 'flex-row-reverse'">
+                                    <div class="w-[48%] flex items-center gap-2" :class="idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse'">
+                                        <div class="relative z-10 w-16 h-16 flex items-center justify-center flex-shrink-0">
+                                            <svg viewBox="0 0 100 100" class="absolute inset-0 w-full h-full drop-shadow-[0_0_4px_rgba(230,38,39,0.4)]"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="url(#hex-grad-timeline)" stroke="#e62627" stroke-width="3" /><defs><linearGradient id="hex-grad-timeline" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e62627" /><stop offset="100%" stop-color="#8b0000" /></linearGradient></defs></svg>
+                                            <i :data-lucide="item.icon" class="relative z-10 text-white w-6 h-6"></i>
+                                        </div>
+                                        <div class="flex flex-col flex-grow" :class="idx % 2 === 0 ? 'items-start' : 'items-end'">
+                                            <h4 class="text-white font-bold text-[11px] uppercase tracking-wider mb-0" :class="idx % 2 === 0 ? 'text-left' : 'text-right'" x-text="item.title"></h4>
+                                            <div class="h-0.5 bg-primary-500/50 w-full"></div>
+                                        </div>
+                                    </div>
+                                    <div class="w-[48%]"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 lg:col-span-8 pt-4">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-white mb-16 text-center lg:text-left">Why Choose Us?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+                        <template x-for="(item, idx) in whyChooseUs" :key="idx">
+                            <div class="text-left"><h4 class="text-2xl font-bold text-primary-500 mb-4" x-text="item.title"></h4><p class="text-white/70 text-base leading-relaxed" x-text="item.description"></p></div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quality-video" class="py-20 bg-gradient-to-br from-white via-zinc-100 to-zinc-200 relative overflow-hidden border-y border-zinc-200">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16"><h2 class="text-4xl font-bold text-zinc-900 tracking-tight">Experience <span class="text-[#ff2d2d]">Quality Video</span></h2></div>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+                <template x-for="(videoId, index) in qualityVideos" :key="index">
+                    <div class="group relative aspect-video rounded-lg overflow-hidden bg-black shadow-xl border border-zinc-300">
+                        <iframe 
+                            class="w-full h-full"
+                            :src="'https://www.youtube.com/embed/' + videoId + (index === 0 ? '?autoplay=1&mute=1&loop=1&playlist=' + videoId : '')"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 bg-black relative overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" class="opacity-30">
+                <filter id="gold-glow-filter"><feGaussianBlur stdDeviation="0.5" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                <g id="circuit-group"></g>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-24">
+                <h2 class="text-4xl font-black text-white tracking-tight uppercase">Our <span class="text-[#ff2d2d]">Services</span></h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                <template x-for="(service, idx) in services" :key="service.id">
+                    <div @click="openServiceDetail(service)" class="group bg-[#0a0a0a] border-2 border-solid border-white p-5 rounded-[24px] hover:border-[#ff2d2d] transition-all duration-500 flex flex-col items-center text-center shadow-2xl h-full cursor-pointer relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#ff2d2d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-14 h-14 rounded-[16px] bg-zinc-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-white/10">
+                            <i :data-lucide="service.icon" class="text-[#ff2d2d] w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 leading-tight tracking-tight group-hover:text-[#ff2d2d] transition-colors" x-text="service.title"></h3>
+                        <p class="text-zinc-400 text-xs mb-4 leading-relaxed opacity-90 font-medium" x-text="service.description"></p>
+                        <button @click.stop="openServiceDetail(service)" type="button" class="mt-auto inline-flex items-center gap-2 text-[#ff2d2d] font-bold hover:text-white transition-all group/link text-sm py-2">
+                            Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-2 transition-transform"></i>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valued Clients Slider (Replaced Projects Section) -->
+    <section class="py-24 bg-black relative overflow-hidden" x-data="{ touchStartX: 0, touchEndX: 0, activeDot: 0 }">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-row justify-between items-center mb-16 px-2">
+                <h2 class="text-4xl font-black text-white tracking-tight mb-0">
+                    Our <span class="text-[#ff2d2d]">Valued Clients</span>
+                </h2>
+                <div class="flex gap-2">
+                    <button @click="$refs.clientSlider.scrollBy({ left: -150, behavior: 'smooth' })" class="w-10 h-10 rounded bg-zinc-800 hover:bg-zinc-700 text-white flex items-center justify-center border border-white/10 transition-colors">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <button @click="$refs.clientSlider.scrollBy({ left: 150, behavior: 'smooth' })" class="w-10 h-10 rounded bg-zinc-800 hover:bg-zinc-700 text-white flex items-center justify-center border border-white/10 transition-colors">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            <div x-ref="clientSlider" class="flex gap-6 overflow-x-hidden pb-4 scroll-smooth no-scrollbar"
+                 @scroll="activeDot = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / 12))"
+                 @touchstart="touchStartX = $event.touches[0].clientX" 
+                 @touchend="touchEndX = $event.changedTouches[0].clientX; if (touchStartX - touchEndX > 50) { $refs.clientSlider.scrollBy({ left: 150, behavior: 'smooth' }) } else if (touchEndX - touchStartX > 50) { $refs.clientSlider.scrollBy({ left: -150, behavior: 'smooth' }) }">
+                <template x-for="idx in 12" :key="idx">
+                    <div class="flex-shrink-0 w-36 h-36 bg-white rounded-lg flex flex-col items-center justify-center p-4 shadow-xl group hover:scale-105 transition-transform duration-300">
+                        <div class="text-center">
+                            <span class="block text-black font-black text-xl leading-none">ZARVI</span>
+                            <span class="block text-[#e72629] font-black text-xl leading-none">STUDIO</span>
+                        </div>
+                        <div class="mt-4 w-12 h-0.5 bg-[#e72629]/50 group-hover:bg-[#e72629] transition-colors"></div>
+                    </div>
+                </template>
+            </div>
+            <!-- Pagination Dots -->
+            <div class="flex justify-center gap-1 mt-2">
+                <template x-for="i in 6" :key="i">
+                    <div class="w-2 h-2 rounded-full transition-all duration-300" :class="activeDot % 6 === i-1 ? 'bg-[#ff2d2d] scale-110' : 'bg-zinc-700'"></div>
+                </template>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white relative overflow-hidden font-hind">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch gap-12 max-w-6xl mx-auto">
+                <!-- Left Side: Knowledge & Thinking Frame (Photo Card) -->
+                <div class="col-span-1 lg:col-span-5 flex">
+                    <div class="relative p-3 border-[4px] border-[#ff2d2d] rounded-[4rem] shadow-[0_20px_50px_rgba(255,45,45,0.15)] bg-white w-full transform hover:scale-[1.01] transition-all duration-500 flex flex-col">
+                        <div class="p-10 flex flex-col items-center text-center space-y-8 flex-grow justify-center">
+                            <div class="relative flex gap-8">
+                                <i data-lucide="brain" class="w-20 h-20 text-[#ff2d2d]"></i>
+                                <i data-lucide="lightbulb" class="w-20 h-20 text-yellow-500"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-4xl font-black text-black uppercase tracking-tighter leading-tight">Knowledge <br/> & Thinking</h3>
+                                <div class="w-20 h-1.5 bg-[#ff2d2d] mx-auto rounded-full"></div>
+                                <p class="text-zinc-500 text-lg font-medium italic leading-relaxed max-w-xs mx-auto">
+                                    "Innovation is the ability to see change as an opportunity - not a threat."
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6 w-full pt-4">
+                                <div class="bg-zinc-50 p-6 rounded-[2rem] border border-zinc-100 flex flex-col items-center gap-2 shadow-sm">
+                                    <i data-lucide="sparkles" class="w-8 h-8 text-[#ff2d2d]"></i>
+                                    <span class="text-sm font-bold text-black">Creative Mind</span>
+                                </div>
+                                <div class="bg-zinc-50 p-6 rounded-[2rem] border border-zinc-100 flex flex-col items-center gap-2 shadow-sm">
+                                    <i data-lucide="search" class="w-8 h-8 text-[#ff2d2d]"></i>
+                                    <span class="text-sm font-bold text-black">Deep Research</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Right Side: FAQ -->
+                <div class="col-span-1 lg:col-span-7 flex flex-col bg-zinc-50 rounded-[4rem] p-10 border border-zinc-100 shadow-sm">
+                    <div class="text-left mb-8">
+                        <h2 class="text-5xl font-black text-black tracking-tight leading-tight mb-1">
+                            Got Questions? <br/> We've <span class="text-[#ff2d2d]">Solution</span>
+                        </h2>
+                        <p class="text-zinc-500 text-lg">Find answers to common questions about our services.</p>
+                    </div>
+ 
+                    <!-- FAQ List with Scroll -->
+                    <div class="overflow-y-auto custom-scrollbar pr-2 h-[450px]">
+                        <div class="space-y-2">
+                        <template x-for="(faq, index) in faqs" :key="index">
+                            <div class="bg-white rounded-2xl border border-zinc-100 overflow-hidden shadow-sm">
+                                <button 
+                                    @click="activeFaq === index ? activeFaq = null : activeFaq = index"
+                                    class="w-full px-6 py-5 flex items-center justify-between text-left transition-all hover:bg-zinc-50"
+                                >
+                                    <span class="text-lg font-bold text-black leading-tight group-hover:text-[#ff2d2d] transition-colors pr-4" x-text="faq.q"></span>
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center group-hover:bg-[#ff2d2d]/10 transition-colors">
+                                            <i data-lucide="chevron-down" 
+                                               class="w-4 h-4 text-black transition-transform duration-300"
+                                               :class="activeFaq === index ? 'rotate-180 text-[#ff2d2d]' : ''"></i>
+                                        </div>
+                                    </div>
+                                </button>
+                                <div 
+                                    x-show="activeFaq === index" 
+                                    x-collapse
+                                    class="bg-zinc-50/50"
+                                >
+                                    <div class="px-6 pb-6 text-zinc-600 text-base leading-relaxed pt-1">
+                                        <p x-text="faq.a" class="max-w-2xl"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 items-center gap-16 relative z-10">
+            <div class="col-span-1 lg:col-span-7 text-center lg:text-left">
+                <h2 class="text-4xl lg:text-5xl font-black mb-8 leading-tight text-black">About <span class="text-[#ff2d2d]">Zarvi Studio</span></h2>
+                <p class="text-zinc-600 text-base lg:text-lg leading-relaxed mb-4">Zarvi Studio is a trusted name in the social marketing landscape of Bangladesh.</p>
+                <p class="text-zinc-600 text-base lg:text-lg leading-relaxed mb-8">With our 5-year experienced team, we bring a new dimension to your brand.</p>
+                <a href="#contact" @click="scrollToForm()" class="inline-block bg-[#ff2d2d] hover:bg-[#e62627] text-white px-10 py-4 rounded-full font-bold transition-all shadow-lg shadow-red-500/20 text-base tracking-tight">Book Now</a>
+            </div>
+            <div class="col-span-1 lg:col-span-5">
+                <div class="relative rounded-[40px] overflow-hidden shadow-2xl bg-[#1a1a1a] aspect-video flex items-center justify-center group cursor-pointer border border-white/5">
+                    <div class="absolute inset-0 flex items-center justify-center"><span class="text-white/10 text-4xl font-black tracking-[0.2em] uppercase select-none">Zarvi Studio</span></div>
+                    <div class="relative z-10 w-20 h-20 rounded-full bg-[#ff2d2d] flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform"><i data-lucide="play" class="ml-1 w-10 h-10 fill-current"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-[#fff1f1] relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="bg-white p-12 rounded-[40px] border border-zinc-100 shadow-2xl max-w-2xl mx-auto">
+                <div class="text-center mb-10"><h2 class="text-4xl font-black text-[#e62627]">Contact Us</h2></div>
+                <div x-show="formSuccess" x-cloak class="py-12 text-center"><div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="check-circle-2" class="text-green-500 w-10 h-10"></i></div><h3 class="text-3xl font-bold mb-2 text-zinc-800">Request Sent!</h3><p class="text-zinc-600 text-lg">We will get back to you shortly.</p></div>
+                <form x-show="!formSuccess" @submit.prevent="submitForm" class="space-y-5">
+                    <div>
+                        <label class="block text-zinc-800 text-sm font-bold mb-2">Your Name</label>
+                        <input type="text" x-model="formData.name" required class="w-full bg-white border border-zinc-200 rounded-lg px-4 py-3 outline-none focus:border-primary-500 transition-colors text-base">
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-zinc-800 text-sm font-bold mb-2">Phone Number</label>
+                            <input type="tel" x-model="formData.phone" required class="w-full bg-white border border-zinc-200 rounded-lg px-4 py-3 outline-none focus:border-primary-500 transition-colors text-base">
+                        </div>
+                        <div>
+                            <label class="block text-zinc-800 text-sm font-bold mb-2">Email</label>
+                            <input type="email" x-model="formData.email" required class="w-full bg-white border border-zinc-200 rounded-lg px-4 py-3 outline-none focus:border-primary-500 transition-colors text-base">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-zinc-800 text-sm font-bold mb-2">Select Service</label>
+                        <select x-model="formData.category" required class="w-full bg-white border border-zinc-200 rounded-lg px-4 py-3 outline-none focus:border-primary-500 transition-colors text-base appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E')] bg-[length:16px_16px] bg-[right_10px_center] bg-no-repeat">
+                            <option value="">Select a service</option>
+                            <option value="cinematography">Cinematography</option>
+                            <option value="photography">Photography</option>
+                            <option value="ad-services">Ad Account & Campaign</option>
+                            <option value="website">Website Develop</option>
+                            <option value="consultancy">Business Growth Consultancy</option>
+                            <option value="software">Software Develop</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-zinc-800 text-sm font-bold mb-2">Your Message</label>
+                        <textarea x-model="formData.message" rows="4" required class="w-full bg-white border border-zinc-200 rounded-lg px-4 py-3 outline-none focus:border-primary-500 transition-colors h-40 resize-none text-base"></textarea>
+                    </div>
+                    <button type="submit" :disabled="isSubmitting" class="w-full bg-[#e62627] hover:bg-[#c11c1d] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] shadow-lg text-lg uppercase tracking-tight">
+                        <span x-show="!isSubmitting" class="flex items-center gap-2"><i data-lucide="send" class="w-5 h-5"></i> Send Information</span>
+                        <span x-show="isSubmitting" class="flex items-center gap-2"><i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-24 border-t border-white/5">
+        <div class="container mx-auto px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
+                <!-- Column 1: Brand -->
+                <div class="text-left overflow-hidden">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 bg-white rounded flex flex-col items-center justify-center shadow-sm border border-zinc-200 flex-shrink-0">
+                            <div class="text-center">
+                                <span class="block text-black font-black text-[6px] leading-none">ZARVI</span>
+                                <span class="block text-[#e62627] font-black text-[6px] leading-none">STUDIO</span>
+                            </div>
+                        </div>
+                        <span class="text-3xl font-bold tracking-tighter uppercase leading-none text-white">ZARVI <span class="text-[#e62627]">STUDIO</span></span>
+                    </div>
+                    <p class="text-zinc-400 mb-10 leading-tight text-sm">Zarvi Studio is a trusted name in the social marketing landscape of Bangladesh.</p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="text-left overflow-hidden">
+                    <h4 class="text-lg font-bold mb-6 text-white uppercase tracking-widest">QUICK LINKS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Home</a></li>
+                        <li><a href="#about" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> About Us</a></li>
+                        <li><a href="#services" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Services</a></li>
+                        <li><a href="#" @click.prevent="projectsModalOpen = true; $nextTick(() => lucide.createIcons())" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Projects</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Our Services -->
+                <div class="text-left overflow-hidden">
+                    <h4 class="text-lg font-bold mb-6 text-white uppercase tracking-widest">OUR SERVICES</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Cinematography</a></li>
+                        <li><a href="#services" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Photography</a></li>
+                        <li><a href="#services" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Ad Account</a></li>
+                        <li><a href="#services" class="text-zinc-400 hover:text-[#e62627] transition-colors flex items-center gap-2 text-sm"><i data-lucide="chevron-right" class="w-4 h-4 text-zinc-600"></i> Web Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="text-left overflow-hidden">
+                    <h4 class="text-lg font-bold mb-6 text-white uppercase tracking-widest">CONTACT INFO</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <span class="text-sm text-zinc-400 uppercase whitespace-nowrap">CALL:</span>
+                            <a href="tel:+8801886243310" class="text-zinc-400 text-sm hover:text-[#e62627] transition-colors whitespace-nowrap">01886243310</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-sm text-zinc-400 uppercase whitespace-nowrap">EMAIL:</span>
+                            <a href="mailto:zarvistudio2023@gmail.com" class="text-zinc-400 text-sm break-all hover:text-[#e62627] transition-colors">zarvistudio2023@gmail.com</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-sm text-zinc-400 uppercase whitespace-nowrap">ADDRESS:</span>
+                            <p class="text-zinc-400 text-sm leading-tight">Demra, Dhaka, Bangladesh</p>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-sm text-zinc-400 uppercase whitespace-nowrap">WHATSAPP:</span>
+                            <a :href="'https://wa.me/' + whatsapp" target="_blank" class="text-zinc-400 text-sm hover:text-[#e62627] transition-colors whitespace-nowrap">+8801886243310</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-12 border-t border-white/5 text-center">
+                <p class="text-zinc-500 text-base">&copy; <span x-text="new Date().getFullYear()"></span> Zarvi Studio. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Projects Modal -->
+    <div x-show="projectsModalOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center overflow-auto p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" @click="projectsModalOpen = false"></div>
+        <div class="bg-white w-full max-w-6xl h-[90vh] rounded-[40px] overflow-hidden relative z-10 shadow-2xl flex flex-col my-8">
+            <!-- Header -->
+            <div class="p-10 border-b border-zinc-100 flex justify-between items-center bg-white">
+                <div class="flex items-center gap-4">
+                    <button @click="goBack()" class="w-12 h-12 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-500 hover:bg-[#ff2d2d] hover:text-white transition-all">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <div>
+                        <h2 class="text-4xl font-bold text-black">Our <span class="text-[#ff2d2d]">Projects</span></h2>
+                        <p class="text-zinc-500 text-base">Take a look at some of our best work across various services.</p>
+                    </div>
+                </div>
+                <button @click="projectsModalOpen = false" class="w-12 h-12 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-500 hover:bg-[#ff2d2d] hover:text-white transition-all">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="flex-grow overflow-y-auto p-10 bg-zinc-50">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <template x-for="(project, index) in projects" :key="project.id">
+                        <div class="bg-white rounded-3xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition-all group">
+                            <div class="h-56 overflow-hidden relative bg-[#1a1a1a] flex items-center justify-center">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-[#ff2d2d]/10 blur-2xl rounded-full"></div>
+                                    <i :data-lucide="project.icon" class="w-20 h-20 text-[#ff2d2d] relative z-10"></i>
+                                </div>
+                                <div class="absolute top-4 right-4 bg-[#ff2d2d] text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase" x-text="project.serviceId.replace('-', ' ')"></div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 text-black" x-text="project.title"></h3>
+                                <p class="text-zinc-500 mb-4 text-sm leading-tight line-clamp-2" x-text="project.description"></p>
+                                <a href="#contact" @click="formData.category = project.serviceId; projectsModalOpen = false; scrollToForm()" class="w-full inline-flex items-center justify-center gap-2 bg-[#00a859] hover:bg-[#008f4c] text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-lg text-sm">
+                                    <i data-lucide="message-circle" class="w-4 h-4"></i> Book Now
+                                </a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center overflow-auto p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="modalOpen = false"></div>
+        <div class="bg-zinc-900 border border-white/10 w-full max-w-lg rounded-3xl overflow-hidden relative z-10 shadow-2xl p-10 my-8">
+            <div class="flex justify-between items-center mb-6">
+                <button @click="goBack()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white transition-all border border-white/10">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button @click="modalOpen = false" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white transition-all border border-white/10">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <h2 class="text-4xl font-bold text-white mb-2">Consultancy Request</h2>
+            <p class="text-zinc-400 mb-8">Fill out the form below to get in touch.</p>
+            <form @submit.prevent="submitModalForm" class="space-y-4">
+                <div><label class="block text-zinc-400 text-sm mb-2">Your Name</label><input type="text" x-model="modalFormData.name" required class="w-full bg-zinc-800 border border-white/5 rounded-xl px-4 py-3 text-white outline-none focus:border-primary-500 transition-colors"></div>
+                <div><label class="block text-zinc-400 text-sm mb-2">Phone Number</label><input type="tel" x-model="modalFormData.phone" required class="w-full bg-zinc-800 border border-white/5 rounded-xl px-4 py-3 text-white outline-none focus:border-primary-500 transition-colors"></div>
+                <div><label class="block text-zinc-400 text-sm mb-2">Business Category</label><input type="text" x-model="modalFormData.category" readonly class="w-full bg-zinc-800 border border-white/5 rounded-xl px-4 py-3 text-white/50 outline-none"></div>
+                <div><label class="block text-zinc-400 text-sm mb-2">Message or Details</label><textarea x-model="modalFormData.message" rows="3" required class="w-full bg-zinc-800 border border-white/5 rounded-xl px-4 py-3 text-white outline-none focus:border-primary-500 transition-colors resize-none"></textarea></div>
+                <button type="submit" :disabled="modalSubmitting" class="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-zinc-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] mt-4"><span x-show="!modalSubmitting" class="flex items-center gap-2"><i data-lucide="send" class="w-5 h-5"></i> Submit Request</span><span x-show="modalSubmitting" class="flex items-center gap-2"><i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Submitting...</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Service Detail Modal (Simulated Next Page) -->
+    <div x-show="serviceDetailOpen" 
+         x-transition:enter="transition ease-out duration-300" 
+         x-transition:enter-start="opacity-0 scale-95" 
+         x-transition:enter-end="opacity-100 scale-100" 
+         x-transition:leave="transition ease-in duration-200" 
+         x-transition:leave-start="opacity-100 scale-100" 
+         x-transition:leave-end="opacity-0 scale-95" 
+         x-cloak class="fixed inset-0 z-[100] flex items-center justify-center overflow-auto p-4">
+        <div class="absolute inset-0 bg-black/98 backdrop-blur-2xl" @click="serviceDetailOpen = false"></div>
+        <div class="bg-black w-full max-w-7xl h-[95vh] rounded-[40px] overflow-y-auto relative z-10 shadow-2xl flex flex-col border border-white/5 custom-scrollbar my-4">
+            <!-- Header -->
+            <div class="p-10 border-b border-white/5 flex justify-between items-center bg-zinc-900/50 sticky top-0 z-50 backdrop-blur-md">
+                <div class="flex items-center gap-4">
+                    <button @click="goBack()" class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#ff2d2d] transition-all border border-white/10">
+                        <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                    </button>
+                    <div class="w-14 h-14 rounded-2xl bg-[#ff2d2d]/10 flex items-center justify-center border border-[#ff2d2d]/20">
+                        <i :data-lucide="selectedService.icon" class="text-[#ff2d2d] w-8 h-8"></i>
+                    </div>
+                    <h2 class="text-4xl font-black text-white tracking-tight">Our <span class="text-[#ff2d2d]" x-text="selectedService.title"></span></h2>
+                </div>
+                <button @click="serviceDetailOpen = false" class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#e62627] transition-all border border-white/10">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-grow">
+                <!-- Standard Service View -->
+                <div x-show="adServiceStep === 'standard'" class="grid grid-cols-1 lg:grid-cols-2 min-h-full">
+                    <!-- Left: Photo Card -->
+                    <div class="p-6 lg:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5">
+                        <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                            <img :src="'https://picsum.photos/seed/' + selectedService.id + '/1200/800'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Description & CTA -->
+                    <div class="p-6 lg:p-12 flex flex-col justify-center bg-zinc-900/30">
+                        <div class="mb-8">
+                            <h4 class="text-[#ff2d2d] text-lg font-bold uppercase tracking-widest mb-4 flex items-center gap-3">
+                                <span class="w-8 h-1 bg-[#ff2d2d] rounded-full"></span>
+                                Service Description
+                            </h4>
+                            <p class="text-zinc-300 text-2xl leading-relaxed font-light mb-8" x-text="selectedService.details"></p>
+                            
+                            <h4 class="text-white text-lg font-bold uppercase tracking-widest mb-4">Select Package</h4>
+                            <div class="grid grid-cols-3 gap-4 mb-8">
+                                <button @click="selectedPackage = 'Regular'" :class="selectedPackage === 'Regular' ? 'bg-[#ff2d2d] text-white' : 'bg-white/5 text-zinc-400 hover:bg-white/10'" class="py-3 rounded-xl font-bold text-sm transition-all border border-white/10">Regular</button>
+                                <button @click="selectedPackage = 'Standard'" :class="selectedPackage === 'Standard' ? 'bg-[#ff2d2d] text-white' : 'bg-white/5 text-zinc-400 hover:bg-white/10'" class="py-3 rounded-xl font-bold text-sm transition-all border border-white/10">Standard</button>
+                                <button @click="selectedPackage = 'Max Premium'" :class="selectedPackage === 'Max Premium' ? 'bg-[#ff2d2d] text-white' : 'bg-white/5 text-zinc-400 hover:bg-white/10'" class="py-3 rounded-xl font-bold text-sm transition-all border border-white/10">Max Premium</button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <button @click="if(selectedPackage) { window.open('https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('*Booking Appointment*\n\n*Service:* ' + selectedService.title + '\n*Package:* ' + selectedPackage), '_blank') } else { alert('Please select a package first') }" class="group relative overflow-hidden bg-[#25D366] hover:bg-[#128C7E] text-white px-8 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(37,211,102,0.3)] transform hover:scale-[1.02]">
+                                <i data-lucide="calendar-check" class="w-6 h-6"></i> Book Appointment
+                            </button>
+                            <a :href="'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('*Free Consultancy Request*\n\n*Service:* ' + selectedService.title)" target="_blank" class="group relative overflow-hidden bg-white text-black hover:bg-zinc-200 px-8 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02]">
+                                <i data-lucide="headphones" class="w-6 h-6"></i> Free Consultancy
+                            </a>
+                        </div>
+                        <p class="text-center text-zinc-500 text-sm mt-6">Direct WhatsApp connection for instant response.</p>
+                    </div>
+                </div>
+
+                <!-- Ad Services Selection View -->
+                <div x-show="adServiceStep === 'select'" class="flex flex-col items-center justify-center p-20 space-y-12">
+                    <h3 class="text-6xl font-black text-white text-center uppercase tracking-tighter">Choose Your <span class="text-[#ff2d2d]">Requirement</span></h3>
+                    <div class="grid grid-cols-2 gap-6 w-full max-w-5xl">
+                        <button @click="adServiceStep = 'account'" class="group bg-zinc-900 border border-white/10 p-12 rounded-[40px] hover:border-[#ff2d2d] transition-all flex flex-col items-center text-center space-y-6">
+                            <div class="w-24 h-24 rounded-3xl bg-[#ff2d2d]/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="user-plus" class="text-[#ff2d2d] w-12 h-12"></i>
+                            </div>
+                            <h4 class="text-3xl font-bold text-white">Ad Account Request Form</h4>
+                            <p class="text-lg text-zinc-400">Request a professional ad account for your business operations.</p>
+                        </button>
+                        <button @click="adServiceStep = 'campaign'" class="group bg-zinc-900 border border-white/10 p-12 rounded-[40px] hover:border-[#ff2d2d] transition-all flex flex-col items-center text-center space-y-6">
+                            <div class="w-24 h-24 rounded-3xl bg-[#ff2d2d]/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="megaphone" class="text-[#ff2d2d] w-12 h-12"></i>
+                            </div>
+                            <h4 class="text-3xl font-bold text-white">Ad Campaign Daily & Monthly Services</h4>
+                            <p class="text-lg text-zinc-400">Boost your page or book comprehensive monthly campaign services.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ad Account Form View -->
+                <div x-show="adServiceStep === 'account'" class="max-w-4xl mx-auto p-12">
+                    <div class="bg-zinc-900 rounded-[40px] border border-white/10 p-12 shadow-2xl">
+                        <h3 class="text-4xl font-black text-white mb-12 text-center">Ad Account <span class="text-[#ff2d2d]">Request Form</span></h3>
+                        <form @submit.prevent="submitAdAccountForm" class="space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div><label class="block text-zinc-400 text-sm mb-2">Name</label><input type="text" x-model="adAccountForm.name" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d]"></div>
+                                <div><label class="block text-zinc-400 text-sm mb-2">Phone Number</label><input type="tel" x-model="adAccountForm.phone" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d]"></div>
+                            </div>
+                            <div><label class="block text-zinc-400 text-sm mb-2">Page Link</label><input type="url" x-model="adAccountForm.pageLink" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d]"></div>
+                            <div><label class="block text-zinc-400 text-sm mb-2">Business Manager ID</label><input type="text" x-model="adAccountForm.bmId" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d]"></div>
+                            <div><label class="block text-zinc-400 text-sm mb-2">Monthly Budget</label><input type="text" x-model="adAccountForm.budget" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d]"></div>
+                            <div><label class="block text-zinc-400 text-sm mb-2">Note</label><textarea x-model="adAccountForm.note" class="w-full bg-black border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-[#ff2d2d] h-32 resize-none"></textarea></div>
+                            
+                            <div class="pt-6">
+                                <button type="submit" class="w-full bg-[#ff2d2d] hover:bg-[#e62627] text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] mb-4">
+                                    <i data-lucide="send" class="w-6 h-6"></i> Submit Request
+                                </button>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <a :href="'https://wa.me/' + whatsapp + '?text=I want to Book Now for Ad Account'" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+                                        <i data-lucide="calendar-check" class="w-5 h-5"></i> Book Now
+                                    </a>
+                                    <a :href="'https://wa.me/' + whatsapp + '?text=I need free consultancy for Ad Account'" target="_blank" class="bg-white text-black hover:bg-zinc-200 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+                                        <i data-lucide="headphones" class="w-5 h-5"></i> Free Consultancy
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Ad Campaign Options View -->
+                <div x-show="adServiceStep === 'campaign'" class="max-w-4xl mx-auto p-20 flex flex-col items-center">
+                    <h3 class="text-6xl font-black text-white text-center mb-12 uppercase tracking-tighter">Ad Campaign <span class="text-[#ff2d2d]">Services</span></h3>
+                    <div class="space-y-6 w-full">
+                        <div @click="selectedCampaignOption = 'Daily/Boost'" :class="selectedCampaignOption === 'Daily/Boost' ? 'border-[#ff2d2d] bg-[#ff2d2d]/5' : 'border-white/10 bg-zinc-900'" class="border p-8 rounded-[30px] flex items-center gap-6 cursor-pointer transition-all group">
+                            <div class="w-16 h-16 rounded-2xl bg-[#ff2d2d]/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="zap" class="text-[#ff2d2d] w-8 h-8"></i>
+                            </div>
+                            <p class="text-2xl font-bold text-white">Daily Service / Boost Page</p>
+                        </div>
+                        <div @click="selectedCampaignOption = 'Monthly'" :class="selectedCampaignOption === 'Monthly' ? 'border-[#ff2d2d] bg-[#ff2d2d]/5' : 'border-white/10 bg-zinc-900'" class="border p-8 rounded-[30px] flex items-center gap-6 cursor-pointer transition-all group">
+                            <div class="w-16 h-16 rounded-2xl bg-[#ff2d2d]/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="calendar-days" class="text-[#ff2d2d] w-8 h-8"></i>
+                            </div>
+                            <p class="text-2xl font-bold text-white">Monthly Campaign Services</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 w-full mt-12">
+                        <button @click="if(selectedCampaignOption) { window.open('https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('*Ad Campaign Booking*\n\n*Option:* ' + selectedCampaignOption), '_blank') } else { alert('Please select an option first') }" class="bg-[#25D366] hover:bg-[#128C7E] text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02]">
+                            <i data-lucide="calendar-check" class="w-6 h-6"></i> Book Now
+                        </button>
+                        <a :href="'https://wa.me/' + whatsapp + '?text=I need free consultancy for Ad Campaign'" target="_blank" class="bg-white text-black hover:bg-zinc-200 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02]">
+                            <i data-lucide="headphones" class="w-6 h-6"></i> Free Consultancy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function appData() {
+            return {
+                whatsapp: "8801886243310",
+                features: ["5 Years Experienced Team", "Expert Digital Marketers", "Professional Sound Designers", "Skilled Editing Team", "Expert Script Writers"],
+                services: [
+                    { id: "cinematography", title: "Cinematography", icon: "video", description: "High-quality cinematic video production for your brand and events.", details: "Our cinematography service focuses on storytelling through visuals. We use high-end equipment and creative techniques to capture the essence of your message, whether it's a commercial, a documentary, or a social media campaign." },
+                    { id: "photography", title: "Photography", icon: "camera", description: "Professional photography services including product, event, and portrait.", details: "Capturing moments that last forever. From professional product shoots to high-energy event coverage, our photography team ensures every frame is a masterpiece." },
+                    { id: "ad-services", title: "Ad Account & Campaign", icon: "megaphone", description: "Expert management and strategic advertising campaigns for maximum ROI.", details: "We handle the complexities of ad account setup and management while designing data-driven campaigns to reach your target audience and drive real business growth." },
+                    { id: "website", title: "Website Development", icon: "globe", description: "Custom website design and development tailored to your needs.", details: "A website is your digital storefront. We build responsive, fast, and user-friendly websites that not only look great but also convert visitors into customers." },
+                    { id: "consultancy", title: "Business Growth Consultancy", icon: "trending-up", description: "Strategic advice to help your business scale and succeed.", details: "We provide expert consultancy to identify growth opportunities, optimize operations, and implement strategies that lead to sustainable business success." },
+                    { id: "software", title: "Software Development", icon: "code", description: "Bespoke software solutions to streamline your business processes.", details: "From custom CRM systems to specialized business tools, we develop software that solves your unique challenges and improves efficiency." }
+                ],
+                projects: [
+                    { id: 1, title: "Strategic Planning", serviceId: "consultancy", icon: "brain", description: "Deep analysis and strategic thinking for business expansion." },
+                    { id: 2, title: "Creative Branding", serviceId: "photography", icon: "lightbulb", description: "Innovative visual identity and creative brand positioning." },
+                    { id: 3, title: "Market Research", serviceId: "ad-services", icon: "search", description: "In-depth market research and data-driven insights." },
+                    { id: 4, title: "Digital Innovation", serviceId: "website", icon: "sparkles", description: "Cutting-edge web solutions with modern technology." },
+                    { id: 5, title: "Knowledge Base", serviceId: "software", icon: "book-open", description: "Custom software solutions for information management." },
+                    { id: 6, title: "Future Tech", serviceId: "cinematography", icon: "cpu", description: "Advanced video production using the latest technology." }
+                ],
+                whyChooseUs: [
+                    { title: "Extensive Expertise", description: "Leverage the knowledge of a diverse team of seasoned professionals, each highly skilled across multiple disciplines." },
+                    { title: "Proven Track Record", description: "Our portfolio speaks for itself, showcasing a history of successful projects and delighted clients." },
+                    { title: "Innovative Strategies", description: "Stay ahead of the curve with forward-thinking strategies that utilize AI, automation, and compelling visuals." },
+                    { title: "Personalized Solutions", description: "We craft strategies uniquely tailored to your business, audience, and goals, ensuring maximum effectiveness." },
+                    { title: "Client-Centric Approach", description: "Enjoy a partnership built on transparent communication, regular updates, and ongoing support." },
+                    { title: "Data-Driven Insights", description: "Harness the power of analytics to make informed decisions. Our strategies are backed by data." }
+                ],
+                timelineItems: [{ title: "Extensive Expertise", icon: "users" }, { title: "Proven Track Record", icon: "award" }, { title: "Innovative Strategies", icon: "lightbulb" }, { title: "Personalized Solutions", icon: "puzzle" }, { title: "Client-Centric Approach", icon: "user-check" }, { title: "Data-Driven Insights", icon: "globe" }],
+                formData: { name: '', phone: '', email: '', category: '', message: '' }, isSubmitting: false, formSuccess: false,
+                adAccountForm: { name: '', phone: '', pageLink: '', bmId: '', budget: '', note: '' },
+                adServiceStep: 'standard', // 'standard', 'select', 'account', 'campaign'
+                selectedPackage: '',
+                selectedCampaignOption: '',
+                modalOpen: false, modalSubmitting: false, modalFormData: { name: '', phone: '', category: '', message: '' },
+                projectsModalOpen: false,
+                serviceDetailOpen: false,
+                selectedService: {},
+                activeFaq: null,
+                faqs: [
+                    { q: "আপনাদের প্যাকেজ কয় ধরনের আছে?", a: "আমাদের মূলত তিনটি প্রধান প্যাকেজ রয়েছে: বেসিক, স্ট্যান্ডার্ড এবং প্রিমিয়াম। আপনার ব্যবসার প্রয়োজন অনুযায়ী আপনি যেকোনোটি বেছে নিতে পারেন।" },
+                    { q: "Economy আর Professional প্যাকেজের পার্থক্য কী?", a: "ইকোনমি প্যাকেজটি ছোট ব্যবসার জন্য সাশ্রয়ী, আর প্রফেশনাল প্যাকেজটি বড় পরিসরে ব্র্যান্ডিং এবং অ্যাডভান্সড ফিচারের জন্য ডিজাইন করা।" },
+                    { q: "Bronze, Gold এবং Platinum সাব-প্যাকেজগুলোর পার্থক্য কী?", a: "ব্রোঞ্জ, গোল্ড এবং প্লাটিনাম হলো আমাদের সাব-প্যাকেজ যা কন্টেন্ট সংখ্যা এবং সেবার মানের ওপর ভিত্তি করে আলাদা করা হয়েছে।" },
+                    { q: "প্রতিটি কন্টেন্টে রিভিশনের সুযোগ আছে কি?", a: "জি, প্রতিটি কন্টেন্টে আমরা নির্দিষ্ট সংখ্যক রিভিশনের সুযোগ দিয়ে থাকি যাতে আপনি শতভাগ সন্তুষ্ট থাকেন।" },
+                    { q: "Facebook বা Instagram-এ অ্যাড ক্যাম্পেইন কি আপনারা রান করবেন?", a: "জি অবশ্যই, আমরা আপনার ব্যবসার জন্য ফেসবুক এবং ইনস্টাগ্রামে টার্গেটেড অ্যাড ক্যাম্পেইন সেটআপ এবং ম্যানেজ করি।" },
+                    { q: "Influencer কন্টেন্ট কিভাবে কাজ করে?", a: "আমরা জনপ্রিয় ইনফ্লুয়েন্সারদের মাধ্যমে আপনার পণ্যের প্রমোশন করি যা আপনার ব্র্যান্ডের বিশ্বাসযোগ্যতা বাড়াতে সাহায্য করে।" },
+                    { q: "ভয়েস ওভার ভিডিও কেমন হয়?", a: "আমরা প্রফেশনাল ভয়েস ওভার আর্টিস্ট দিয়ে ভিডিও তৈরি করি যা আপনার কন্টেন্টকে আরও আকর্ষণীয় করে তোলে।" },
+                    { q: "কন্টেন্ট কয়দিনের মধ্যে ডেলিভারি হয়?", a: "সাধারণত অর্ডার কনফার্ম হওয়ার ৩ থেকে ৭ কর্মদিবসের মধ্যে আমরা কন্টেন্ট ডেলিভারি দিয়ে থাকি।" },
+                    { q: "আমরা কি আমাদের লোগো ও প্রোডাক্ট ছবি দিতে পারি?", a: "জি অবশ্যই, আপনার ব্র্যান্ডের লোগো এবং প্রোডাক্টের ছবি দিলে আমরা সেগুলো ব্যবহার করে কন্টেন্ট আরও কাস্টমাইজ করতে পারি।" },
+                    { q: "Google Ranking এর জন্য কাজ করেন?", a: "জি, আমরা এসইও (SEO) ফ্রেন্ডলি কন্টেন্ট এবং টেকনিক্যাল এসইও নিয়ে কাজ করি যা গুগল র‍্যাঙ্কিংয়ে সাহায্য করে।" },
+                    { q: "আমি যদি শুধুমাত্র রিল ভিডিও চাই, তাহলে?", a: "জি, আমরা শুধুমাত্র রিল বা শর্ট ভিডিওর জন্যও আলাদা প্যাকেজ অফার করি।" },
+                    { q: "সব প্যাকেজগুলোতে Influencer content কি পাবো না?", a: "ইনফ্লুয়েন্সার কন্টেন্ট মূলত আমাদের প্রিমিয়াম এবং প্লাটিনাম প্যাকেজের অন্তর্ভুক্ত। তবে আপনি চাইলে আলাদাভাবেও এটি নিতে পারেন।" },
+                    { q: "আপনারা কি আমাকে পুরো মাসের কন্টেন্ট প্ল্যান দিয়ে দেবেন?", a: "জি, আমরা পুরো মাসের একটি কন্টেন্ট ক্যালেন্ডার এবং প্ল্যান আপনাকে আগেই প্রদান করবো।" },
+                    { q: "আপনার খরচটা তুলনামূলকভাবে বেশি মনে হচ্ছে কেন?", a: "আমরা কোয়ালিটি এবং রেজাল্টের ওপর গুরুত্ব দেই। আমাদের অভিজ্ঞ টিম এবং প্রিমিয়াম টুলস ব্যবহারের কারণে খরচ কিছুটা বেশি মনে হতে পারে, তবে এটি দীর্ঘমেয়াদে লাভজনক।" },
+                    { q: "একসাথে ৬ মাস বা ১ বছরের সাবস্ক্রিপশন নিলে কোনো বিশেষ ছাড় পাওয়া যাবে?", a: "জি, দীর্ঘমেয়াদী সাবস্ক্রিপশনের ক্ষেত্রে আমরা আকর্ষণীয় ডিসকাউন্ট এবং বিশেষ সুবিধা প্রদান করে থাকি।" },
+                    { q: "আপনারা কি ওয়েবসাইট ডিজাইন বা ডেভেলপমেন্ট করেন?", a: "জি, আমরা কাস্টম ওয়েবসাইট ডিজাইন এবং ডেভেলপমেন্ট সেবা প্রদান করি।" },
+                    { q: "আপনারা কি শুধু কন্টেন্ট বানিয়ে দেন, না কি পোস্টও করেন?", a: "আমরা কন্টেন্ট তৈরির পাশাপাশি আপনার সোশ্যাল মিডিয়া পেজ ম্যানেজমেন্ট এবং পোস্টিংয়ের কাজও করে থাকি।" },
+                    { q: "আমি বাইরে থাকি (বিদেশে), তাও কি এই সার্ভিস নিতে পারবো?", a: "জি অবশ্যই, আমরা বিশ্বের যেকোনো প্রান্ত থেকে ক্লায়েন্টদের সেবা প্রদান করি। পেমেন্ট এবং যোগাযোগের জন্য আমাদের অনলাইন সিস্টেম রয়েছে।" }
+                ],
+                qualityVideos: [
+                    "hCo_rV8nXX8",
+                    "p2infkwdl8U",
+                    "F6LkTw3XzuU",
+                    "cKyZr0AbgkU",
+                    "kZJY2ik4VYI",
+                    "5AEtTA7Qwfo",
+                    "Vx2yTVE8eRQ",
+                    "lokJ9vxlgHA",
+                    "C0PRyX8qheY"
+                ],
+                init() {
+                    this.$nextTick(() => {
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                    });
+                    this.generateCircuitBackground('circuit-group', 15, 0.15, 'circuit-path');
+                    this.generateCircuitBackground('circuit-thick-group', 12, 0.4, 'circuit-path-thick');
+                    this.generateCircuitBackground('services-circuit-group', 10, 0.2, 'circuit-path');
+                    
+                    // Auto-scroll for clients
+                    setInterval(() => {
+                        const slider = this.$refs.clientSlider;
+                        if(slider) {
+                            slider.scrollBy({ left: 1, behavior: 'auto' });
+                            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+                                slider.scrollTo({ left: 0 });
+                            }
+                        }
+                    }, 30);
+                },
+                scrollToForm() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); },
+                goBack() {
+                    if (this.serviceDetailOpen) {
+                        if (this.selectedService.id === 'ad-services') {
+                            if (this.adServiceStep === 'account' || this.adServiceStep === 'campaign') {
+                                this.adServiceStep = 'select';
+                                this.$nextTick(() => lucide.createIcons());
+                                return;
+                            }
+                        }
+                        this.serviceDetailOpen = false;
+                    } else if (this.projectsModalOpen) {
+                        this.projectsModalOpen = false;
+                    } else if (this.modalOpen) {
+                        this.modalOpen = false;
+                    }
+                },
+                openModal(service) { this.modalFormData.category = service.title; this.modalOpen = true; setTimeout(() => lucide.createIcons(), 10); },
+                openServiceDetail(service) { 
+                    this.selectedService = service; 
+                    if (service.id === 'ad-services') {
+                        this.adServiceStep = 'select';
+                    } else {
+                        this.adServiceStep = 'standard';
+                    }
+                    this.serviceDetailOpen = true; 
+                    setTimeout(() => lucide.createIcons(), 10); 
+                },
+                openConsultancyFromDetail() { this.serviceDetailOpen = false; this.openModal(this.selectedService); },
+                submitAdAccountForm() {
+                    const msg = `*Ad Account Request Form*%0A%0A*Name:* ${this.adAccountForm.name}%0A*Phone:* ${this.adAccountForm.phone}%0A*Page Link:* ${this.adAccountForm.pageLink}%0A*BM ID:* ${this.adAccountForm.bmId}%0A*Monthly Budget:* ${this.adAccountForm.budget}`;
+                    window.open(`https://wa.me/${this.whatsapp}?text=${msg}`, '_blank');
+                },
+                generateCircuitBackground(groupId, count, strokeWidth, pathClass) {
+                    const group = document.getElementById(groupId);
+                    if(!group) return;
+                    for (let i = 0; i < count; i++) {
+                        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                        const d = `M ${Math.random() * 100} ${Math.random() * 100} ${Math.random() > 0.5 ? 'H' : 'V'} ${Math.random() * 100} ${Math.random() > 0.5 ? 'V' : 'H'} ${Math.random() * 100}`;
+                        path.setAttribute("d", d); path.setAttribute("stroke", "#ff2d2d"); path.setAttribute("stroke-width", strokeWidth);
+                        path.setAttribute("fill", "none"); path.setAttribute("class", pathClass);
+                        path.style.animationDelay = `${Math.random() * 10}s`;
+                        group.appendChild(path);
+                    }
+                },
+                async submitForm() {
+                    this.isSubmitting = true; await new Promise(r => setTimeout(r, 1500));
+                    const msg = `*New Contact Inquiry*%0A%0A*Name:* ${this.formData.name}%0A*Phone:* ${this.formData.phone}%0A*Category:* ${this.formData.category}%0A*Message:* ${this.formData.message}`;
+                    window.open(`https://wa.me/${this.whatsapp}?text=${msg}`, '_blank');
+                    this.formSuccess = true; this.isSubmitting = false;
+                    setTimeout(() => this.formSuccess = false, 5000);
+                },
+                async submitModalForm() {
+                    this.modalSubmitting = true; await new Promise(r => setTimeout(r, 1500));
+                    const msg = `*New Consultancy Request*%0A%0A*Name:* ${this.modalFormData.name}%0A*Phone:* ${this.modalFormData.phone}%0A*Category:* ${this.modalFormData.category}%0A*Message:* ${this.modalFormData.message}`;
+                    window.open(`https://wa.me/${this.whatsapp}?text=${msg}`, '_blank');
+                    this.modalSubmitting = false; this.modalOpen = false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

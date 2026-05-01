@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-script: "Dancing Script", cursive;
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-200: #fecdd3;
+  --color-primary-300: #fda4af;
+  --color-primary-400: #fb7185;
+  --color-primary-500: #f43f5e;
+  --color-primary-600: #e62627;
+  --color-primary-700: #cc1f20;
+  --color-primary-800: #b31b1c;
+  --color-primary-900: #991718;
+  --color-primary-950: #000000;
+  
+  --color-maroon-600: #e62627;
+  --color-maroon-700: #cc1f20;
+  --color-brand-red: #e62627;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+.bg-grid-pattern {
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.bg-mesh {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(0, 100%, 25%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(0, 100%, 25%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(0, 100%, 25%, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(0, 100%, 25%, 0.1) 0px, transparent 50%);
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+}
